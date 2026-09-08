@@ -412,7 +412,10 @@ name = "Capstone"
 version = "d536b1577fd033a31d75f48fd183aa425256cc18"
 url = "https://github.com/frida/capstone.git"
 options = [
-    "-Darchs=all",
+    { value = "-Darchs=all", when = "not machine.is_freestanding" },
+    { value = "-Darchs=arm64", when = "machine.is_freestanding and machine.arch == 'arm64'" },
+    { value = "-Darchs=arm", when = "machine.is_freestanding and machine.arch == 'arm'" },
+    { value = "-Darchs=x86", when = "machine.is_freestanding and machine.arch in {'x86', 'x86_64'}" },
     "-Duse_arch_registration=true",
     "-Dx86_att_disable=true",
     "-Dcli=disabled",
