@@ -40,6 +40,7 @@ options = [
     "-Dsemihost=false",
     "-Dspecsdir=none",
     "-Dthread-local-storage=false",
+    "-Dio-pos-args=true",
 ]
 
 [compiler-rt]
@@ -131,6 +132,7 @@ options = [
     "-Dlibmount=disabled",
     "-Dtests=false",
     "--force-fallback-for=pcre",
+    { value = "-Ddiet=true", when = "machine.is_freestanding" },
     { value = "-Dglib_debug=disabled", when = "machine.config_is_optimized" },
     { value = "-Dglib_assert=false", when = "machine.config_is_optimized" },
     { value = "-Dglib_checks=false", when = "machine.config_is_optimized" },

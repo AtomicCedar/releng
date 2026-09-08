@@ -259,6 +259,11 @@ def generate_machine_config(machine: MachineSpec,
     if target_abi is not None:
         properties["target_abi"] = str_to_meson(target_abi)
 
+    if machine.is_freestanding:
+        properties["have_c99_snprintf"] = bool_to_meson(True)
+        properties["have_c99_vsnprintf"] = bool_to_meson(True)
+        properties["have_unix98_printf"] = bool_to_meson(True)
+
     machine_file = outdir / f"frida-{machine.identifier}.txt"
     with machine_file.open("w", encoding="utf-8") as f:
         config.write(f)
